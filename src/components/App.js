@@ -10,12 +10,14 @@ import React, { useState, useEffect } from "react";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -98,12 +100,16 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.changeCardLikeStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    })
-    .catch((err) =>
-    console.log(`Ошибка при редактировании данных лайка: ${err}`)
-  )
+    api
+      .changeCardLikeStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) =>
+        console.log(`Ошибка при редактировании данных лайка: ${err}`)
+      );
   }
 
   function handleCardDelete(card) {
@@ -131,7 +137,7 @@ function App() {
           `Ошибка при получении первоначальных данных карточек с сервера: ${err}`
         )
       );
-  },[]);
+  }, []);
 
   useEffect(() => {
     api
@@ -144,54 +150,67 @@ function App() {
           `Ошибка при получении первоначальных данных пользователя с сервера: ${err}`
         )
       );
-  },[]);
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Main
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleDeleteCardClick}
-        />
-        <Footer />
-        <ImagePopup
-          card={selectedCard}
-          isOpen={isImagePopupOpen}
-          onClose={closeAllPopups}
-        />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-          textOnSaveBtn={showSavingText}
-        />
+        <Switch>
+          <Route exact path="/">
+            {isLoggedIn ? <Redirect to="/react-mesto-auth"/> : <Redirect to="/sign-in"/>}
+          </Route>
+          <Route path="/react-mesto-auth">
+            <Main
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteCardClick}
+            />
+            <Footer />
+            <ImagePopup
+              card={selectedCard}
+              isOpen={isImagePopupOpen}
+              onClose={closeAllPopups}
+            />
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+              textOnSaveBtn={showSavingText}
+            />
 
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-          textOnSaveBtn={showSavingText}
-        />
+            <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={closeAllPopups}
+              onUpdateUser={handleUpdateUser}
+              textOnSaveBtn={showSavingText}
+            />
 
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-          textOnCreateBtn={showCreatingText}
-        />
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={closeAllPopups}
+              onAddPlace={handleAddPlaceSubmit}
+              textOnCreateBtn={showCreatingText}
+            />
 
-        <ConfirmationPopup
-          deleteCardInfo={deleteCardWithConfirm}
-          onClose={closeAllPopups}
-          onDelete={handleCardDelete}
-          textOnDeleteBtn={showDeletingText}
-        />
+            <ConfirmationPopup
+              deleteCardInfo={deleteCardWithConfirm}
+              onClose={closeAllPopups}
+              onDelete={handleCardDelete}
+              textOnDeleteBtn={showDeletingText}
+            />
+          </Route>
+          <Route path="/sign-in">
+          {/* <Login /> */}
+          </Route>
+          <Route path="/sign-up">
+            {/* <Register /> */}
+          </Route>
+        </Switch>
       </div>
     </CurrentUserContext.Provider>
   );
