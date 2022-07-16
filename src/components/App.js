@@ -6,6 +6,7 @@ import ConfirmationPopup from "./ConfirmationPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
+import Login from "./Login";
 import React, { useState, useEffect } from "react";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -18,7 +19,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -177,7 +178,14 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick}
           />
-          <Route path="/sign-in">{/* <Login /> */}</Route>
+          <Route path="/sign-in">
+            {
+              <Login
+                onAddPlace={handleAddPlaceSubmit}
+                textOnCreateBtn={showCreatingText}
+              />
+            }
+          </Route>
           <Route path="/sign-up">{/* <Register /> */}</Route>
         </Switch>
         <Footer />
