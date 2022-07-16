@@ -11,13 +11,14 @@ import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
 import { Redirect, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -158,59 +159,60 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/">
-            {isLoggedIn ? <Redirect to="/react-mesto-auth"/> : <Redirect to="/sign-in"/>}
+            {isLoggedIn ? (
+              <Redirect to="/react-mesto-auth" />
+            ) : (
+              <Redirect to="/sign-in" />
+            )}
           </Route>
-          <Route path="/react-mesto-auth">
-            <Main
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onCardDelete={handleDeleteCardClick}
-            />
-            <Footer />
-            <ImagePopup
-              card={selectedCard}
-              isOpen={isImagePopupOpen}
-              onClose={closeAllPopups}
-            />
-            <EditAvatarPopup
-              isOpen={isEditAvatarPopupOpen}
-              onClose={closeAllPopups}
-              onUpdateAvatar={handleUpdateAvatar}
-              textOnSaveBtn={showSavingText}
-            />
-
-            <EditProfilePopup
-              isOpen={isEditProfilePopupOpen}
-              onClose={closeAllPopups}
-              onUpdateUser={handleUpdateUser}
-              textOnSaveBtn={showSavingText}
-            />
-
-            <AddPlacePopup
-              isOpen={isAddPlacePopupOpen}
-              onClose={closeAllPopups}
-              onAddPlace={handleAddPlaceSubmit}
-              textOnCreateBtn={showCreatingText}
-            />
-
-            <ConfirmationPopup
-              deleteCardInfo={deleteCardWithConfirm}
-              onClose={closeAllPopups}
-              onDelete={handleCardDelete}
-              textOnDeleteBtn={showDeletingText}
-            />
-          </Route>
-          <Route path="/sign-in">
-          {/* <Login /> */}
-          </Route>
-          <Route path="/sign-up">
-            {/* <Register /> */}
-          </Route>
+          <ProtectedRoute
+            path="/react-mesto-auth"
+            isLoggedIn={isLoggedIn}
+            component={Main}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleDeleteCardClick}
+          />
+          <Route path="/sign-in">{/* <Login /> */}</Route>
+          <Route path="/sign-up">{/* <Register /> */}</Route>
         </Switch>
+        <Footer />
+        <ImagePopup
+          card={selectedCard}
+          isOpen={isImagePopupOpen}
+          onClose={closeAllPopups}
+        />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+          textOnSaveBtn={showSavingText}
+        />
+
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+          textOnSaveBtn={showSavingText}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+          textOnCreateBtn={showCreatingText}
+        />
+
+        <ConfirmationPopup
+          deleteCardInfo={deleteCardWithConfirm}
+          onClose={closeAllPopups}
+          onDelete={handleCardDelete}
+          textOnDeleteBtn={showDeletingText}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
