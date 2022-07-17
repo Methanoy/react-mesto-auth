@@ -156,13 +156,13 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header email={email} onSignOut={onSignOut} />
         <Switch>
           <Route exact path="/">
             {isLoggedIn ? (
               <Redirect to="/react-mesto-auth" />
             ) : (
-              <Redirect to="/sign-in" />
+              <Redirect to="/signin" />
             )}
           </Route>
           <ProtectedRoute
@@ -177,8 +177,8 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick}
           />
-          <Route path="/sign-in">{/* <Login /> */}</Route>
-          <Route path="/sign-up">{/* <Register /> */}</Route>
+          <Route path="/signin">{/* <Login /> */}</Route>
+          <Route path="/signup">{/* <Register /> */}</Route>
         </Switch>
         <Footer />
         <ImagePopup
