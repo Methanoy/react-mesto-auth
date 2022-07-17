@@ -4,7 +4,6 @@ import { Route, Link } from "react-router-dom";
 function Header(props) {
   return (
     <header className="header">
-      <div>
         <img
           className="header__logo"
           src={headerLogo}
@@ -20,7 +19,6 @@ function Header(props) {
             Регистрация
           </Link>
         </Route>
-      </div>
     </header>
   );
 }
