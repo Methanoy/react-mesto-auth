@@ -160,13 +160,13 @@ function App() {
         <Switch>
           <Route exact path="/">
             {isLoggedIn ? (
-              <Redirect to="/react-mesto-auth" />
+              <Redirect to="/main" />
             ) : (
               <Redirect to="/signin" />
             )}
           </Route>
           <ProtectedRoute
-            path="/react-mesto-auth"
+            path="/main"
             isLoggedIn={isLoggedIn}
             component={Main}
             onEditAvatar={handleEditAvatarClick}
