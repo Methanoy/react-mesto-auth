@@ -1,0 +1,14 @@
+.authorization__btn {
+    min-width: 358px;
+    margin-top: 216px;
+    min-height: 50px;
+    background: #fff;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+    border: 0;
+    cursor: pointer;
+    transition: opacity 1s ease 0s;
+}

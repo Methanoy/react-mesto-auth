@@ -1,38 +1,37 @@
-import PopupWithForm from "./PopupWithForm";
-import { React, useEffect, useRef } from "react";
+import { React, useState } from "react";
 
 function Login(props) {
   return (
-    <PopupWithForm
-      name="cards"
-      buttonText={props.textOnCreateBtn}
-      titleText="Регистрация"
-      //onSubmit={handleSubmit}
-    >
-      <input
-        id="login-input"
-        className="popup__input popup__input_cardname"
-        type="text"
-        name="caption"
-        placeholder="Email"
-        minLength="2"
-        maxLength="30"
-        autoComplete="off"
-        //ref={captionRef || ""}
-        required
-      />
-      <span className="cardname-input-error popup__input-error"></span>
-      <input
-        id="password-input"
-        className="popup__input popup__input_link"
-        type="url"
-        name="link"
-        placeholder="Пароль"
-        autoComplete="off"
-        //ref={linkRef || ""}
-        required
-      />
-    </PopupWithForm>
+    <section className="authorization">
+      <div className="authorization__container">
+        <h3 className="authorization__title">Вход</h3>
+        <form className="authorization__form">
+          <input
+            id="login-input"
+            className="authorization__input"
+            type="email"
+            name="login"
+            placeholder="Email"
+            minLength="2"
+            maxLength="30"
+            autoComplete="off"
+            required
+          />
+          <input
+            id="password-input"
+            className="authorization__input"
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            minLength="4"
+            maxLength="15"
+            autoComplete="off"
+            required
+          />
+          <button className="authorization__btn">Войти</button>
+        </form>
+      </div>
+    </section>
   );
 }
 

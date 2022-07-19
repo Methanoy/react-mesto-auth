@@ -161,13 +161,13 @@ function App() {
         <Switch>
           <Route exact path="/">
             {isLoggedIn ? (
-              <Redirect to="/react-mesto-auth" />
+              <Redirect to="/main" />
             ) : (
-              <Redirect to="/sign-in" />
+              <Redirect to="/signin" />
             )}
           </Route>
           <ProtectedRoute
-            path="/react-mesto-auth"
+            path="/main"
             isLoggedIn={isLoggedIn}
             component={Main}
             onEditAvatar={handleEditAvatarClick}
@@ -178,15 +178,13 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick}
           />
-          <Route path="/sign-in">
+          <Route path="/signin">
             {
               <Login
-                onAddPlace={handleAddPlaceSubmit}
-                textOnCreateBtn={showCreatingText}
               />
             }
           </Route>
-          <Route path="/sign-up">{/* <Register /> */}</Route>
+          <Route path="/signup">{/* <Register /> */}</Route>
         </Switch>
         <Footer />
         <ImagePopup
