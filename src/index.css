@@ -20,6 +20,7 @@
 @import url(./blocks/authorization/__form/authorization__form.css);
 @import url(./blocks/authorization/__input/authorization__input.css);
 @import url(./blocks/authorization/__btn/authorization__btn.css);
+@import url(./blocks/authorization/__link/authorization__link.css);
 
 /* profile */
 @import url(./blocks/profile/profile.css);

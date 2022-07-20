@@ -7,6 +7,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import Login from "./Login";
+import Register from "./Register";
 import React, { useState, useEffect } from "react";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -160,11 +161,10 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/">
-            {isLoggedIn ? (
-              <Redirect to="/main" />
-            ) : (
-              <Redirect to="/signin" />
-            )}
+            {isLoggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
+          </Route>
+          <Route exact path="/react-mesto-auth">
+            {isLoggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
           </Route>
           <ProtectedRoute
             path="/main"
@@ -178,13 +178,8 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick}
           />
-          <Route path="/signin">
-            {
-              <Login
-              />
-            }
-          </Route>
-          <Route path="/signup">{/* <Register /> */}</Route>
+          <Route path="/signin">{<Login />}</Route>
+          <Route path="/signup">{<Register />}</Route>
         </Switch>
         <Footer />
         <ImagePopup
