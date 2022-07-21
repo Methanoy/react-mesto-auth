@@ -8,6 +8,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import Login from "./Login";
 import Register from "./Register";
+import InfoTooltip from "./InfoTooltip";
 import React, { useState, useEffect } from "react";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -214,6 +215,7 @@ function App() {
           onDelete={handleCardDelete}
           textOnDeleteBtn={showDeletingText}
         />
+        <InfoTooltip isOpen={true} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
   );
