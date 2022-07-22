@@ -11,17 +11,20 @@ import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
 import React, { useState, useEffect } from "react";
 import api from "../utils/api.js";
+import * as auth from "../utils/auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const history = useHistory();
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authData, setAuthData] = useState({});
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -130,6 +133,15 @@ function App() {
       .finally(() => setIsShowDeletingText("Да"));
   }
 
+  const onLogin = ({ email, password }) => {
+    return authorize(email, password).then((res) => {
+      if (res.jwt) {
+        setIsLoggedIn(true);
+        localStorage.setItem("jwt", res.jwt);
+      }
+    });
+  };
+
   useEffect(() => {
     api
       .getInitialCardsData()
@@ -156,6 +168,33 @@ function App() {
       );
   }, []);
 
+  const authorize = async (jwt) => {
+    const content = await auth.getContent(jwt).then((res) => {
+      if (res) {
+        const { email, password } = res;
+        setIsLoggedIn(true);
+        setAuthData({
+          email,
+          password,
+        });
+      }
+    });
+    return content;
+  };
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth(jwt);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/main");
+    }
+  }, [isLoggedIn]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -179,7 +218,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick}
           />
-          <Route path="/signin">{<Login />}</Route>
+          <Route path="/signin">{<Login onLogin={onLogin} />}</Route>
           <Route path="/signup">{<Register />}</Route>
         </Switch>
         <Footer />
