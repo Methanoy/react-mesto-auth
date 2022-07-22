@@ -6,7 +6,6 @@ export const handleResponse = (res) => {
     `Okay, Houston, we've had a problem here: ${res.status}`
   );
 };
-
 class Api {
   constructor(options) {
     this.cardsUrl = options.cardsUrl;

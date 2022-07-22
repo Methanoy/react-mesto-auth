@@ -215,7 +215,7 @@ function App() {
           onDelete={handleCardDelete}
           textOnDeleteBtn={showDeletingText}
         />
-        <InfoTooltip isOpen={true} onClose={closeAllPopups} />
+        <InfoTooltip isOpen={false} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
   );

@@ -12,8 +12,8 @@ export const register = (password, email) => {
     body: JSON.stringify({
       password,
       email,
-    }).then(handleResponse),
-  });
+    }),
+  }).then(handleResponse);
 };
 
 export const login = (password, email) => {
@@ -26,8 +26,8 @@ export const login = (password, email) => {
     body: JSON.stringify({
       password,
       email,
-    }).then(handleResponse),
-  });
+    }),
+  }).then(handleResponse);
 };
 
 export const checkToken = (token) => {
