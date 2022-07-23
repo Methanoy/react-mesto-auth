@@ -133,11 +133,11 @@ function App() {
       .finally(() => setIsShowDeletingText("Да"));
   }
 
-  const onLogin = ({ email, password }) => {
-    return authorize(email, password).then((res) => {
+  const onLogin = ({ password, email }) => {
+    return auth.login(password, email).then((res) => {
       if (res.jwt) {
-        setIsLoggedIn(true);
         localStorage.setItem("jwt", res.jwt);
+        setIsLoggedIn(true);
       }
     });
   };
@@ -169,7 +169,7 @@ function App() {
   }, []);
 
   const authorize = async (jwt) => {
-    const content = await auth.getContent(jwt).then((res) => {
+    const content = await auth.checkToken(jwt).then((res) => {
       if (res) {
         const { email, password } = res;
         setIsLoggedIn(true);
@@ -185,9 +185,9 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth(jwt);
+      authorize(jwt);
     }
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -199,13 +199,16 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
+
         <Switch>
           <Route exact path="/">
             {isLoggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
           </Route>
+
           <Route exact path="/react-mesto-auth">
             {isLoggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
           </Route>
+
           <ProtectedRoute
             path="/main"
             isLoggedIn={isLoggedIn}
@@ -218,10 +221,18 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick}
           />
-          <Route path="/signin">{<Login onLogin={onLogin} />}</Route>
-          <Route path="/signup">{<Register />}</Route>
+
+          <Route path="/signin">
+            <Login onLogin={onLogin} />
+          </Route>
+
+          <Route path="/signup">
+            <Register />
+          </Route>
         </Switch>
+
         <Footer />
+
         <ImagePopup
           card={selectedCard}
           isOpen={isImagePopupOpen}
@@ -254,6 +265,7 @@ function App() {
           onDelete={handleCardDelete}
           textOnDeleteBtn={showDeletingText}
         />
+
         <InfoTooltip isOpen={false} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

@@ -10,7 +10,7 @@ const Register = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     auth.register(password, email).then((res) => {
-      if (res.statusCode === 200) {
+      if (res.statusCode !== 400) {
         history.push("/signin");
       }
     });

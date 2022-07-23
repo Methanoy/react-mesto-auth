@@ -1,25 +1,25 @@
-import { React, useState, useHistory } from "react";
-import * as auth from "../utils/auth";
+import { React, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    const resetForm = () => {
-      setEmail("");
-      setPassword("");
-    };
 
     onLogin({ email, password })
       .then(() => {
         history.push("/main");
       })
       .then(() => resetForm())
-      .catch((err) => console.log(`Ошибка в email или пароле: ${err}`));
+      .catch((err) => console.log(`Ошибка email или пароля: ${err}`));
   };
 
   return (
