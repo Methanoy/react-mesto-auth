@@ -1,6 +1,6 @@
-function Footer() {
+function Footer({ isLoggedIn }) {
   return (
-    <footer className="footer">
+    <footer className={`footer ${isLoggedIn && "footer_visible"}`}>
       <p className="footer__copyright">
         &copy; {new Date().getFullYear()} Mesto Russia
       </p>

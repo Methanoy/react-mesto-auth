@@ -50,6 +50,7 @@
 /* footer */
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
+@import url(./blocks/footer/_visible/footer_visible.css);
 
 /* popup */
 @import url(./blocks/popup/popup.css);

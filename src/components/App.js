@@ -221,7 +221,7 @@ function App() {
           </Route>
         </Switch>
 
-        <Footer />
+        <Footer isLoggedIn={isLoggedIn} />
 
         <ImagePopup
           card={selectedCard}
