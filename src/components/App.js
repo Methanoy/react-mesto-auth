@@ -137,14 +137,13 @@ function App() {
     auth
       .login(password, email)
       .then((res) => {
-        console.log(res.token);
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
           history.push("/main");
         }
       })
-      .catch((err) => console.log(`Ошибка при логине: ${err}`));
+      .catch((err) => console.log(`Ошибка при логине пользователя: ${err}`));
   }
 
   function onRegister(password, email) {
@@ -155,7 +154,7 @@ function App() {
           history.push("/signin");
         }
       })
-      .catch((err) => console.log(`Ошибка при регистрации: ${err}`));
+      .catch((err) => console.log(`Ошибка при регистрации пользователя: ${err}`));
   }
 
   useEffect(() => {
