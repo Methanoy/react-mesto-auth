@@ -10,3 +10,15 @@
   border-bottom: 2px solid #ccc;
   color: #fff;
 }
+
+@media screen and (max-width: 879px) and (min-width: 321px) {
+  .authorization__input {
+      width: 310px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .authorization__input {
+      width: 260px;
+  }
+}

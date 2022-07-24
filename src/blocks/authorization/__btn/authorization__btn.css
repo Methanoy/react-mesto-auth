@@ -12,3 +12,15 @@
     cursor: pointer;
     transition: opacity 1s ease 0s;
 }
+
+@media screen and (max-width: 879px) and (min-width: 321px) {
+    .authorization__btn {
+        min-width: 310px;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .authorization__btn {
+        min-width: 260px;
+    }
+  }
