@@ -154,7 +154,9 @@ function App() {
           history.push("/signin");
         }
       })
-      .catch((err) => console.log(`Ошибка при регистрации пользователя: ${err}`));
+      .catch((err) =>
+        console.log(`Ошибка при регистрации пользователя: ${err}`)
+      );
   }
 
   useEffect(() => {
