@@ -1,19 +1,13 @@
 import { React, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import * as auth from "../utils/auth";
+import { Link } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ onRegister }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    auth.register(password, email).then((res) => {
-      if (res.statusCode !== 400) {
-        history.push("/signin");
-      }
-    });
+    onRegister(password, email);
   };
 
   return (
@@ -47,7 +41,9 @@ const Register = () => {
             autoComplete="off"
             required
           />
-          <button className="authorization__btn" type="submit">Зарегистрироваться</button>
+          <button className="authorization__btn" type="submit">
+            Зарегистрироваться
+          </button>
           <Link to="/signin" className="authorization__link">
             Уже зарегистрированы? Войти
           </Link>

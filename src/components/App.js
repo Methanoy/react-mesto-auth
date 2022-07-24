@@ -24,7 +24,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [authData, setAuthData] = useState({});
+  //const [authData, setAuthData] = useState({});
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -133,14 +133,30 @@ function App() {
       .finally(() => setIsShowDeletingText("Да"));
   }
 
-  const onLogin = ({ password, email }) => {
-    return auth.login(password, email).then((res) => {
-      if (res.jwt) {
-        localStorage.setItem("jwt", res.jwt);
-        setIsLoggedIn(true);
-      }
-    });
-  };
+  function onLogin(password, email) {
+    auth
+      .login(password, email)
+      .then((res) => {
+        console.log(res.token);
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setIsLoggedIn(true);
+          history.push("/main");
+        }
+      })
+      .catch((err) => console.log(`Ошибка при логине: ${err}`));
+  }
+
+  function onRegister(password, email) {
+    auth
+      .register(password, email)
+      .then((res) => {
+        if (res) {
+          history.push("/signin");
+        }
+      })
+      .catch((err) => console.log(`Ошибка при регистрации: ${err}`));
+  }
 
   useEffect(() => {
     api
@@ -167,33 +183,6 @@ function App() {
         )
       );
   }, []);
-
-  const authorize = async (jwt) => {
-    const content = await auth.checkToken(jwt).then((res) => {
-      if (res) {
-        const { email, password } = res;
-        setIsLoggedIn(true);
-        setAuthData({
-          email,
-          password,
-        });
-      }
-    });
-    return content;
-  };
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      authorize(jwt);
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      history.push("/main");
-    }
-  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -227,7 +216,7 @@ function App() {
           </Route>
 
           <Route path="/signup">
-            <Register />
+            <Register onRegister={onRegister} />
           </Route>
         </Switch>
 
