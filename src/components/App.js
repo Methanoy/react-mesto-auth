@@ -24,7 +24,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //const [authData, setAuthData] = useState({});
+  const [email, setEmail] = useState("");
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -133,6 +133,19 @@ function App() {
       .finally(() => setIsShowDeletingText("Да"));
   }
 
+  function onRegister(password, email) {
+    auth
+      .register(password, email)
+      .then((res) => {
+        if (res) {
+          history.push("/signin");
+        }
+      })
+      .catch((err) =>
+        console.log(`Ошибка при регистрации пользователя: ${err}`)
+      );
+  }
+
   function onLogin(password, email) {
     auth
       .login(password, email)
@@ -146,18 +159,23 @@ function App() {
       .catch((err) => console.log(`Ошибка при логине пользователя: ${err}`));
   }
 
-  function onRegister(password, email) {
-    auth
-      .register(password, email)
-      .then((res) => {
-        if (res) {
-          history.push("/signin");
-        }
-      })
-      .catch((err) =>
-        console.log(`Ошибка при регистрации пользователя: ${err}`)
-      );
-  }
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            setEmail(res.data.email);
+            history.push("/main");
+          }
+        })
+        .catch((err) =>
+          console.log(`Ошибка при авторизации пользователя: ${err}`)
+        );
+    }
+  }, [history]);
 
   useEffect(() => {
     api
