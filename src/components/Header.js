@@ -27,10 +27,18 @@ function Header({ email }) {
         </Link>
       </Route>
       <Route path="/main">
-        <div>
-          <p>{email}</p>
-          <button onClick={onSignout}>Выйти</button>
-        </div>
+        <nav className="header__menu">
+          <ul className="header__menu-list">
+            <li>
+              <span className="header__menu-list_email">{email}</span>
+            </li>
+            <li>
+              <button onClick={onSignout} className="header__menu-list_signout-btn" type="button">
+                Выйти
+              </button>
+            </li>
+          </ul>
+        </nav>
       </Route>
     </header>
   );
