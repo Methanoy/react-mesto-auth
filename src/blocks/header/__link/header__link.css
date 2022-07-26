@@ -5,6 +5,11 @@
     color: #fff;
     text-decoration: none;
     margin-bottom: 46px;
+    transition: opacity 1s ease 0s;
+}
+
+.header__link:hover {
+    opacity: 0.6;
 }
 
 @media screen and (max-width: 879px) and (min-width: 321px) {

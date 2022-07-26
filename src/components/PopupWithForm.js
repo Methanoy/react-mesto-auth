@@ -1,7 +1,6 @@
 import { useEscKeydown, useOutsideClick } from "../utils/hooks";
 
-function PopupWithForm(props) {
-  
+const PopupWithForm = (props) => {
   useEscKeydown(props.onClose);
   useOutsideClick(props.onClose);
 
@@ -20,7 +19,11 @@ function PopupWithForm(props) {
           <h3 className={`popup__title popup__title_${props.name}`}>
             {props.titleText}
           </h3>
-          <form className="popup__form" name={props.name} onSubmit={props.onSubmit}>
+          <form
+            className="popup__form"
+            name={props.name}
+            onSubmit={props.onSubmit}
+          >
             {props.children}
             <button
               className="popup__save-button"
@@ -34,6 +37,6 @@ function PopupWithForm(props) {
       </div>
     </div>
   );
-}
+};
 
 export default PopupWithForm;

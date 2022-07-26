@@ -23,6 +23,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -41,6 +43,11 @@ function App() {
   const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
   const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setIsAddPlacePopupOpen(true);
+  const handleCardClick = (card) => {
+    setIsSelectedCard(card);
+    setIsImagePopupOpen(true);
+  };
+  const handleSetIsLogOut = () => setIsLoggedIn(false);
 
   const handleDeleteCardClick = (card) =>
     setDeleteCardWithConfirm({
@@ -49,17 +56,13 @@ function App() {
       card: card,
     });
 
-  const handleCardClick = (card) => {
-    setIsSelectedCard(card);
-    setIsImagePopupOpen(true);
-  };
-
   const closeAllPopups = () => {
-    setIsEditAvatarPopupOpen(false) ||
-      setIsEditProfilePopupOpen(false) ||
-      setIsAddPlacePopupOpen(false) ||
-      setIsImagePopupOpen(false) ||
-      setDeleteCardWithConfirm({ ...deleteCardWithConfirm, isOpen: false });
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false);
+    setDeleteCardWithConfirm({ ...deleteCardWithConfirm, isOpen: false });
+    setIsInfoTooltipOpen(false);
   };
 
   function handleUpdateUser(data) {
@@ -138,12 +141,14 @@ function App() {
       .register(password, email)
       .then((res) => {
         if (res) {
+          setIsRegister(true);
           history.push("/signin");
         }
       })
       .catch((err) =>
         console.log(`Ошибка при регистрации пользователя: ${err}`)
-      );
+      )
+      .finally(() => setIsInfoTooltipOpen(true), setIsRegister(false));
   }
 
   function onLogin(password, email) {
@@ -151,12 +156,14 @@ function App() {
       .login(password, email)
       .then((res) => {
         if (res.token) {
+          setEmail(email);
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
           history.push("/main");
         }
       })
-      .catch((err) => console.log(`Ошибка при логине пользователя: ${err}`));
+      .catch((err) => console.log(`Ошибка при логине пользователя: ${err}`))
+      .finally(() => setIsInfoTooltipOpen(true));
   }
 
   useEffect(() => {
@@ -206,7 +213,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header email={email} />
+        <Header email={email} setLogOut={handleSetIsLogOut} />
 
         <Switch>
           <Route exact path="/">
@@ -274,7 +281,12 @@ function App() {
           textOnDeleteBtn={showDeletingText}
         />
 
-        <InfoTooltip isOpen={false} onClose={closeAllPopups} />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          isLoggedIn={isLoggedIn}
+          isRegister={isRegister}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

@@ -1,26 +1,30 @@
 .authorization__btn {
-    min-width: 358px;
-    margin-top: 216px;
-    min-height: 50px;
-    background: #fff;
-    border-radius: 2px;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #000;
-    border: 0;
-    cursor: pointer;
-    transition: opacity 1s ease 0s;
+  min-width: 358px;
+  margin-top: 216px;
+  min-height: 50px;
+  background: #fff;
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 1s ease 0s;
+}
+
+.authorization__btn:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 879px) and (min-width: 321px) {
-    .authorization__btn {
-        min-width: 310px;
-    }
+  .authorization__btn {
+    min-width: 310px;
   }
-  
-  @media screen and (max-width: 320px) {
-    .authorization__btn {
-        min-width: 260px;
-    }
+}
+
+@media screen and (max-width: 320px) {
+  .authorization__btn {
+    min-width: 260px;
   }
+}

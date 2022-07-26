@@ -6,3 +6,17 @@
     margin: 0;
     padding: 0;
 }
+
+@media screen and (max-width: 879px) and (min-width: 321px) {
+    .header__menu-list {
+    flex-direction: column;
+    text-align: center;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header__menu-list {
+        flex-direction: column;
+        text-align: center;
+    }
+}
