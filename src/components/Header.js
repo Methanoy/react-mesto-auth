@@ -33,7 +33,11 @@ function Header({ email }) {
               <span className="header__menu-list_email">{email}</span>
             </li>
             <li>
-              <button onClick={onSignout} className="header__menu-list_signout-btn" type="button">
+              <button
+                onClick={onSignout}
+                className="header__menu-list_signout-btn"
+                type="button"
+              >
                 Выйти
               </button>
             </li>

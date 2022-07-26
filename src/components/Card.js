@@ -1,4 +1,4 @@
-import {React, useContext, useEffect } from "react";
+import { React, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card(props) {

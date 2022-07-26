@@ -56,12 +56,12 @@ function App() {
     });
 
   const closeAllPopups = () => {
-    setIsEditAvatarPopupOpen(false) ||
-      setIsEditProfilePopupOpen(false) ||
-      setIsAddPlacePopupOpen(false) ||
-      setIsImagePopupOpen(false) ||
-      setDeleteCardWithConfirm({ ...deleteCardWithConfirm, isOpen: false }) ||
-      setIsInfoTooltipOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false);
+    setDeleteCardWithConfirm({ ...deleteCardWithConfirm, isOpen: false });
+    setIsInfoTooltipOpen(false);
   };
 
   function handleUpdateUser(data) {

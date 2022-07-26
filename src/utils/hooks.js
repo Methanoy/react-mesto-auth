@@ -13,13 +13,14 @@ export function useEscKeydown(handleClosePopup) {
 }
 
 export function useOutsideClick(handleClosePopup) {
-    useEffect(() => {
-    function handleOutsideClickClose(evt) {if (evt.target.classList.contains("popup_opened")) {
+  useEffect(() => {
+    function handleOutsideClickClose(evt) {
+      if (evt.target.classList.contains("popup_opened")) {
         handleClosePopup();
-          }
-        }
-        document.addEventListener("mousedown", handleOutsideClickClose);
-        return () =>
-          document.removeEventListener("mousedown", handleOutsideClickClose);
-      });
+      }
+    }
+    document.addEventListener("mousedown", handleOutsideClickClose);
+    return () =>
+      document.removeEventListener("mousedown", handleOutsideClickClose);
+  });
 }
