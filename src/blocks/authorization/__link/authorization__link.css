@@ -10,3 +10,15 @@
 .authorization__link:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 879px) and (min-width: 321px) {
+  .authorization__link {
+    margin-top: 18px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .authorization__link {
+    margin-top: 20px;
+  }
+}
