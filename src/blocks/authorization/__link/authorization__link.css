@@ -4,4 +4,9 @@
   line-height: 17px;
   color: #fff;
   text-decoration: none;
+  transition: opacity 1s ease 0s;
+}
+
+.authorization__link:hover {
+  opacity: 0.6;
 }
