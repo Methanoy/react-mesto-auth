@@ -1,10 +1,14 @@
 import { React } from "react";
+import { useEscKeydown, useOutsideClick } from "../utils/hooks";
+import allowed from "../images/auth__allowed.svg";
+import denied from "../images/auth__denied.svg";
 
 function InfoTooltip(props) {
+  useEscKeydown(props.onClose);
+  useOutsideClick(props.onClose);
+
   return (
-    <section
-      className={`popup popup_${props.name} ${props.isOpen && "popup_opened"}`}
-    >
+    <section className={`popup ${props.isOpen && "popup_opened"}`}>
       <div className="popup__container">
         <button
           className="popup__close-button"
@@ -13,9 +17,14 @@ function InfoTooltip(props) {
           onClick={props.onClose}
         ></button>
         <div className="popup__content">
-          <img></img>
-          <h3 className={`popup__title popup__title_${props.name}`}>
-            Вы успешно зарегистрировались!
+          <img
+            className="popup__auth-image"
+            src={props.isLoggedIn || props.isRegister ? allowed : denied}
+          ></img>
+          <h3 className="popup__title popup__title_auth">
+            {props.isLoggedIn || props.isRegister
+              ? "Вы успешно зарегистрировались!"
+              : "Что-то пошло не так! Попробуйте еще раз."}
           </h3>
         </div>
       </div>
