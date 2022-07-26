@@ -1,11 +1,12 @@
 import headerLogo from "../images/header_logo.svg";
 import { Route, Link, useHistory } from "react-router-dom";
 
-function Header({ email }) {
+function Header({ email, setLogOut }) {
   const history = useHistory();
 
   function onSignout() {
     localStorage.removeItem("jwt");
+    setLogOut();
     history.push("/signin");
   }
 

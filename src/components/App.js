@@ -47,6 +47,7 @@ function App() {
     setIsSelectedCard(card);
     setIsImagePopupOpen(true);
   };
+  const handleSetIsLogOut = () => setIsLoggedIn(false);
 
   const handleDeleteCardClick = (card) =>
     setDeleteCardWithConfirm({
@@ -212,7 +213,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header email={email} />
+        <Header email={email} setLogOut={handleSetIsLogOut} />
 
         <Switch>
           <Route exact path="/">
