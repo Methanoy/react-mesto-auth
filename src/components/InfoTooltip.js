@@ -20,7 +20,7 @@ function InfoTooltip(props) {
           <img
             className="popup__auth-image"
             src={props.isLoggedIn || props.isRegister ? allowed : denied}
-          ></img>
+          alt="Сообщение об результате авторизации"></img>
           <h3 className="popup__title popup__title_auth">
             {props.isLoggedIn || props.isRegister
               ? "Вы успешно зарегистрировались!"

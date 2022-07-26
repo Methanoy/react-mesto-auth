@@ -24,7 +24,7 @@ const Register = ({ onRegister }) => {
             onChange={({ target }) => setEmail(target.value)}
             placeholder="Email"
             minLength="2"
-            maxLength="30"
+            maxLength="40"
             autoComplete="off"
             required
           />
@@ -37,7 +37,7 @@ const Register = ({ onRegister }) => {
             onChange={({ target }) => setPassword(target.value)}
             placeholder="Пароль"
             minLength="4"
-            maxLength="15"
+            maxLength="30"
             autoComplete="off"
             required
           />
