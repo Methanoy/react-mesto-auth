@@ -216,16 +216,9 @@ function App() {
         <Header email={email} setLogOut={handleSetIsLogOut} />
 
         <Switch>
-          <Route exact path="/">
-            {isLoggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
-          </Route>
-
-          <Route exact path="/react-mesto-auth">
-            {isLoggedIn ? <Redirect to="/main" /> : <Redirect to="/signin" />}
-          </Route>
-
           <ProtectedRoute
-            path="/main"
+            exact
+            path="/"
             isLoggedIn={isLoggedIn}
             component={Main}
             onEditAvatar={handleEditAvatarClick}
@@ -243,6 +236,10 @@ function App() {
 
           <Route path="/signup">
             <Register onRegister={onRegister} />
+          </Route>
+
+          <Route path="/">
+            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
 
