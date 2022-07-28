@@ -10,6 +10,14 @@ const Register = ({ onRegister }) => {
     onRegister(password, email);
   };
 
+  const handleEmailChange = (evt) => {
+    setEmail(evt.target.value);
+  };
+
+  const handlePasswordChange = (evt) => {
+    setPassword(evt.target.value);
+  };
+
   return (
     <section className="authorization">
       <div className="authorization__container">
@@ -21,7 +29,7 @@ const Register = ({ onRegister }) => {
             type="email"
             name="login"
             value={email}
-            onChange={({ target }) => setEmail(target.value)}
+            onChange={handleEmailChange}
             placeholder="Email"
             minLength="2"
             maxLength="40"
@@ -34,7 +42,7 @@ const Register = ({ onRegister }) => {
             type="password"
             name="password"
             value={password}
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={handlePasswordChange}
             placeholder="Пароль"
             minLength="4"
             maxLength="30"
