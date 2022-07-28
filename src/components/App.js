@@ -185,30 +185,34 @@ function App() {
   }, [history]);
 
   useEffect(() => {
-    api
-      .getInitialCardsData()
-      .then((cardsArr) => {
-        setCards(cardsArr);
-      })
-      .catch((err) =>
-        console.log(
-          `Ошибка при получении первоначальных данных карточек с сервера: ${err}`
-        )
-      );
-  }, []);
+    if (isLoggedIn) {
+      api
+        .getInitialCardsData()
+        .then((cardsArr) => {
+          setCards(cardsArr);
+        })
+        .catch((err) =>
+          console.log(
+            `Ошибка при получении первоначальных данных карточек с сервера: ${err}`
+          )
+        );
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
-    api
-      .getInitialUserData()
-      .then((userData) => {
-        setIsCurrentUser(userData);
-      })
-      .catch((err) =>
-        console.log(
-          `Ошибка при получении первоначальных данных пользователя с сервера: ${err}`
-        )
-      );
-  }, []);
+    if (isLoggedIn) {
+      api
+        .getInitialUserData()
+        .then((userData) => {
+          setIsCurrentUser(userData);
+        })
+        .catch((err) =>
+          console.log(
+            `Ошибка при получении первоначальных данных пользователя с сервера: ${err}`
+          )
+        );
+    }
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
