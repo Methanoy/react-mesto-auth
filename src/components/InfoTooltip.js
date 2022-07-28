@@ -3,26 +3,27 @@ import { useEscKeydown, useOutsideClick } from "../utils/hooks";
 import allowed from "../images/auth__allowed.svg";
 import denied from "../images/auth__denied.svg";
 
-function InfoTooltip(props) {
-  useEscKeydown(props.onClose);
-  useOutsideClick(props.onClose);
+function InfoTooltip({ onClose, infoTooltip }) {
+  useEscKeydown(onClose);
+  useOutsideClick(onClose);
 
   return (
-    <section className={`popup ${props.isOpen && "popup_opened"}`}>
+    <section className={`popup ${infoTooltip.isOpen && "popup_opened"}`}>
       <div className="popup__container">
         <button
           className="popup__close-button"
           aria-label="Закрыть"
           type="button"
-          onClick={props.onClose}
+          onClick={onClose}
         ></button>
         <div className="popup__content">
           <img
             className="popup__auth-image"
-            src={props.isLoggedIn || props.isRegister ? allowed : denied}
-          alt="Сообщение об результате авторизации"></img>
+            src={infoTooltip.status ? allowed : denied}
+            alt="Сообщение о результате авторизации"
+          ></img>
           <h3 className="popup__title popup__title_auth">
-            {props.isLoggedIn || props.isRegister
+            {infoTooltip.status
               ? "Вы успешно зарегистрировались!"
               : "Что-то пошло не так! Попробуйте еще раз."}
           </h3>
