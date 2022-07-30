@@ -6,6 +6,7 @@
     background-color: none;
     cursor: pointer;
     transition: opacity 1s ease 0s;
+    padding: 0;
 }
 
 .header__menu-list_signout-btn:hover {

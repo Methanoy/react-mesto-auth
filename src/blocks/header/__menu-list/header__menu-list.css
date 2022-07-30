@@ -1,6 +1,6 @@
 .header__menu-list {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     list-style: none;
     column-gap: 24px;
     margin: 0;

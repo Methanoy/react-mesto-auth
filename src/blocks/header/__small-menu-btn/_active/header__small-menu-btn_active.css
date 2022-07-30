@@ -1,0 +1,9 @@
+.header__small-menu-btn_active {
+    content: '';
+    position: absolute;
+    top: 7.5px;
+    right: 0;
+    width: 24px;
+    height: 3px;
+    background-color: #fff;
+}

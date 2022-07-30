@@ -43,6 +43,11 @@ function Header({ email, setLogOut }) {
                   Выйти
                 </button>
               </li>
+              <li>
+                <button className="header__small-menu-btn">
+                  <span className="header__small-menu-btn_active" />
+                </button>
+              </li>
             </ul>
           </nav>
         </Route>
