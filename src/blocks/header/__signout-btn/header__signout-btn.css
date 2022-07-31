@@ -1,4 +1,4 @@
-.header__menu-list_signout-btn {
+.header__signout-btn {
     color: #a9a9a9;
     font-weight: 400;
     border: none;
@@ -9,18 +9,18 @@
     padding: 0;
 }
 
-.header__menu-list_signout-btn:hover {
+.header__signout-btn:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 879px) and (min-width: 321px) {
-    .header__menu-list_signout-btn {
+    .header__signout-btn {
         padding-top: 15px;
     }
 }
 
 @media screen and (max-width: 320px) {
-    .header__menu-list_signout-btn {
+    .header__signout-btn {
         padding-top: 18px;
     }
 }

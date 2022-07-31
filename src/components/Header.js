@@ -35,12 +35,12 @@ function Header({ email, setLogOut }) {
             <nav className="header__menu">
               <ul className="header__menu-list">
                 <li>
-                  <span className="header__menu-list_email">{email}</span>
+                  <span className="header__email">{email}</span>
                 </li>
                 <li>
                   <button
                     onClick={onSignout}
-                    className="header__menu-list_signout-btn"
+                    className="header__signout-btn"
                     type="button"
                   >
                     Выйти

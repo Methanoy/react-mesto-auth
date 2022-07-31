@@ -1,0 +1,5 @@
+.header__menu_small {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -13,11 +13,13 @@
 @import url(./blocks/header/__logo/header__logo.css);
 @import url(./blocks/header/__link/header__link.css);
 @import url(./blocks/header/__menu/header__menu.css);
+@import url(./blocks/header/__menu/_small/header__menu_small.css);
 @import url(./blocks/header/__small-menu-btn/header__small-menu-btn.css);
 @import url(./blocks/header/__small-menu-btn/_active/header__small-menu-btn_active.css);
 @import url(./blocks/header/__menu-list/header__menu-list.css);
-@import url(./blocks/header/__menu-list/_email.css/header__menu-list_email.css);
-@import url(./blocks/header/__menu-list/_signout-btn.css/header__menu-list_signout-btn.css);
+@import url(./blocks/header/__menu-list/_small/header__menu-list_small.css);
+@import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__signout-btn/header__signout-btn.css);
 
 /* authorization */
 @import url(./blocks/authorization/__title/authorization__title.css);
