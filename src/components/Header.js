@@ -13,7 +13,7 @@ function Header({ email, setLogOut }) {
 
   return (
     <>
-      <SmallMenu email={email} onSignout={onSignout} />
+      <SmallMenu email={email} onSignout={onSignout} isSmallMenu={true} />
       <header className="header">
         <img
           className="header__logo"
@@ -32,22 +32,7 @@ function Header({ email, setLogOut }) {
             </Link>
           </Route>
           <Route path="/">
-            <nav className="header__menu">
-              <ul className="header__menu-list">
-                <li>
-                  <span className="header__email">{email}</span>
-                </li>
-                <li>
-                  <button
-                    onClick={onSignout}
-                    className="header__signout-btn"
-                    type="button"
-                  >
-                    Выйти
-                  </button>
-                </li>
-              </ul>
-            </nav>
+            <SmallMenu email={email} onSignout={onSignout} isSmallMenu={false} />
             <button className="header__small-menu-btn">
               <span className="header__small-menu-btn_active" />
             </button>
