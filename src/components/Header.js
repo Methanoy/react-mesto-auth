@@ -14,12 +14,12 @@ function Header({ email, setLogOut }) {
   }
 
   function toggleSmallMenu() {
-    isSmallMenuOpen(!setIsSmallMenuOpen);
+    setIsSmallMenuOpen(!isSmallMenuOpen);
   }
 
   return (
     <>
-      <SmallMenu email={email} onSignout={onSignout} isSmallMenu={true} />
+      {isSmallMenuOpen && <SmallMenu email={email} onSignout={onSignout} isSmallMenu={true} /> }
       <header className="header">
         <img
           className="header__logo"
@@ -38,11 +38,11 @@ function Header({ email, setLogOut }) {
             </Link>
           </Route>
           <Route path="/">
-            <SmallMenu
+          {isSmallMenuOpen && <SmallMenu
               email={email}
               onSignout={onSignout}
               isSmallMenu={false}
-            />
+            /> }
             <button
               onClick={toggleSmallMenu}
               className="header__small-menu-btn"
