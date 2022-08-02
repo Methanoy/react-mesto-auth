@@ -1,14 +1,20 @@
 import headerLogo from "../images/header_logo.svg";
 import { Route, Link, useHistory, Switch } from "react-router-dom";
 import SmallMenu from "./SmallMenu";
+import { useState } from "react";
 
 function Header({ email, setLogOut }) {
   const history = useHistory();
+  const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
 
   function onSignout() {
     localStorage.removeItem("jwt");
     setLogOut();
     history.push("/signin");
+  }
+
+  function toggleSmallMenu() {
+    isSmallMenuOpen(!setIsSmallMenuOpen);
   }
 
   return (
@@ -32,8 +38,16 @@ function Header({ email, setLogOut }) {
             </Link>
           </Route>
           <Route path="/">
-            <SmallMenu email={email} onSignout={onSignout} isSmallMenu={false} />
-            <button className="header__small-menu-btn">
+            <SmallMenu
+              email={email}
+              onSignout={onSignout}
+              isSmallMenu={false}
+            />
+            <button
+              onClick={toggleSmallMenu}
+              className="header__small-menu-btn"
+              type="button"
+            >
               <span className="header__small-menu-btn_active" />
             </button>
           </Route>
