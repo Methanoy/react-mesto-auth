@@ -1,7 +1,14 @@
 .header__menu_small {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 880px;
-  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: none;
+}
+
+@media screen and (max-width: 879px) {
+  .header__menu_small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 880px;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  }
 }

@@ -1,10 +1,8 @@
-function SmallMenu({ email, onSignout, isSmallMenu }) {
+function SmallMenu({ email, onSignout}) {
   return (
-    <nav className={isSmallMenu ? "header__menu_small" : "header__menu"}>
+    <nav className="header__menu_small">
       <ul
-        className={
-          isSmallMenu ? "header__menu-list_small" : "header__menu-list"
-        }
+        className="header__menu-list_small"
       >
         <li>
           <span className="header__email">{email}</span>

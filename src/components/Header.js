@@ -19,7 +19,14 @@ function Header({ email, setLogOut }) {
 
   return (
     <>
-      {isSmallMenuOpen && <SmallMenu email={email} onSignout={onSignout} isSmallMenu={true} /> }
+      {isSmallMenuOpen && (
+        <SmallMenu
+          email={email}
+          onSignout={onSignout}
+          isSmallMenu={true}
+          isSmallMenuOpen={isSmallMenuOpen}
+        />
+      )}
       <header className="header">
         <img
           className="header__logo"
@@ -38,11 +45,32 @@ function Header({ email, setLogOut }) {
             </Link>
           </Route>
           <Route path="/">
-          {isSmallMenuOpen && <SmallMenu
-              email={email}
-              onSignout={onSignout}
-              isSmallMenu={false}
-            /> }
+            <nav className="header__menu">
+              <ul className="header__menu-list">
+                <li>
+                  <span
+                    className={
+                      isSmallMenuOpen ? "header__email_hide" : "header__email"
+                    }
+                  >
+                    {email}
+                  </span>
+                </li>
+                <li>
+                  <button
+                    onClick={onSignout}
+                    className={
+                      isSmallMenuOpen
+                        ? "header__signout-btn_hide"
+                        : "header__signout-btn"
+                    }
+                    type="button"
+                  >
+                    Выйти
+                  </button>
+                </li>
+              </ul>
+            </nav>
             <button
               onClick={toggleSmallMenu}
               className="header__small-menu-btn"

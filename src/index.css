@@ -20,6 +20,8 @@
 @import url(./blocks/header/__menu-list/_small/header__menu-list_small.css);
 @import url(./blocks/header/__email/header__email.css);
 @import url(./blocks/header/__signout-btn/header__signout-btn.css);
+@import url(./blocks/header/__email/_hide/header__email_hide.css);
+@import url(./blocks/header/__signout-btn/_hide/header__signout-btn_hide.css);
 
 /* authorization */
 @import url(./blocks/authorization/__title/authorization__title.css);
