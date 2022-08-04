@@ -10,7 +10,7 @@
   color: #000;
   border: 0;
   cursor: pointer;
-  transition: opacity 1s ease 0s;
+  transition: opacity .3s ease 0s;
 }
 
 .authorization__btn:hover {

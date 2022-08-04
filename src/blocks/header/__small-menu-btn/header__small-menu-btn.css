@@ -47,6 +47,6 @@
     border: none;
     width: 30px;
     height: 24px;
-    transition: opacity 1s ease 0s;
+    transition: opacity .3s ease 0s;
   }
 }

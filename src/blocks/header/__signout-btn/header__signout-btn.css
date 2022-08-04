@@ -5,7 +5,7 @@
     background: none;
     background-color: none;
     cursor: pointer;
-    transition: opacity 1s ease 0s;
+    transition: opacity .3s ease 0s;
     padding: 0;
 }
 
