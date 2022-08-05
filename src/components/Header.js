@@ -23,7 +23,6 @@ function Header({ email, setLogOut }) {
         <SmallMenu
           email={email}
           onSignout={onSignout}
-          isSmallMenu={true}
           isSmallMenuOpen={isSmallMenuOpen}
         />
       )}
@@ -48,22 +47,12 @@ function Header({ email, setLogOut }) {
             <nav className="header__menu">
               <ul className="header__menu-list">
                 <li>
-                  <span
-                    className={
-                      isSmallMenuOpen ? "header__email_hide" : "header__email"
-                    }
-                  >
-                    {email}
-                  </span>
+                  <span className="header__email">{email}</span>
                 </li>
                 <li>
                   <button
                     onClick={onSignout}
-                    className={
-                      isSmallMenuOpen
-                        ? "header__signout-btn_hide"
-                        : "header__signout-btn"
-                    }
+                    className="header__signout-btn"
                     type="button"
                   >
                     Выйти
