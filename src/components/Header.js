@@ -65,7 +65,7 @@ function Header({ email, setLogOut }) {
               className="header__small-menu-btn"
               type="button"
             >
-              <span className="header__small-menu-btn_active" />
+              <span className={isSmallMenuOpen ? "header__small-menu-btn" : null} />
             </button>
           </Route>
         </Switch>
