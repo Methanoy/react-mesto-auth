@@ -1,1 +1,13 @@
+.header__small-menu-btn_active:before {
+  transform: rotate(45deg) translateY(-50%);
+  top: 14px;
+}
 
+.header__small-menu-btn_active:after {
+  transform: rotate(-45deg) translateY(50%);
+  top: 12px;
+}
+
+.header__small-menu-btn_active span {
+  transform: scale(0);
+}
