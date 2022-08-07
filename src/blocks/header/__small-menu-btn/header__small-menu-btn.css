@@ -5,7 +5,8 @@
 .header__small-menu-btn span {
   content: "";
   position: absolute;
-  top: 10.5px;
+  transform: translateY(-50%);
+  top: 12px;
   right: 0;
   width: 30px;
   height: 3px;
@@ -24,10 +25,12 @@
 
 .header__small-menu-btn::before {
   bottom: 0;
+  transition: opacity .3s ease 0s;
 }
 
 .header__small-menu-btn::after {
   top: 0;
+  transition: opacity .3s ease 0s;
 }
 
 .header__small-menu-btn:hover {
@@ -36,7 +39,6 @@
 
 @media screen and (max-width: 879px) {
   .header__small-menu-btn {
-    display: visible;
     cursor: pointer;
     display: block;
     position: relative;
@@ -49,4 +51,4 @@
     height: 24px;
     transition: opacity .3s ease 0s;
   }
-}
+} 
