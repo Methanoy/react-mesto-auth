@@ -11,16 +11,3 @@ export function useEscKeydown(handleClosePopup) {
     return () => document.removeEventListener("keydown", handleEscClose);
   });
 }
-
-export function useOutsideClick(handleClosePopup) {
-  useEffect(() => {
-    function handleOutsideClickClose(evt) {
-      if (evt.target.classList.contains("popup_opened")) {
-        handleClosePopup();
-      }
-    }
-    document.addEventListener("mousedown", handleOutsideClickClose);
-    return () =>
-      document.removeEventListener("mousedown", handleOutsideClickClose);
-  });
-}

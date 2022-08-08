@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-//import { useEscKeydown, useOutsideClick } from "../utils/hooks";
 
 function EditProfilePopup(props) {
   const currentUser = useContext(CurrentUserContext);

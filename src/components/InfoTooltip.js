@@ -1,14 +1,19 @@
 import { React } from "react";
-import { useEscKeydown, useOutsideClick } from "../utils/hooks";
+import { useEscKeydown } from "../utils/hooks";
 import allowed from "../images/auth__allowed.svg";
 import denied from "../images/auth__denied.svg";
 
 function InfoTooltip({ onClose, infoTooltip }) {
   useEscKeydown(onClose);
-  useOutsideClick(onClose);
+
+  function handleOutsideClickClose(evt) {
+    if (evt.target === evt.currentTarget && infoTooltip.isOpen) {
+      onClose();
+    }
+  }
 
   return (
-    <section className={`popup ${infoTooltip.isOpen && "popup_opened"}`}>
+    <section className={`popup ${infoTooltip.isOpen && "popup_opened"}`} onMouseDown={handleOutsideClickClose}>
       <div className="popup__container">
         <button
           className="popup__close-button"
