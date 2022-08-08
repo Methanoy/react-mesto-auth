@@ -1,12 +1,17 @@
-import { useEscKeydown, useOutsideClick } from "../utils/hooks";
+import { useEscKeydown } from "../utils/hooks";
 
 const PopupWithForm = (props) => {
   useEscKeydown(props.onClose);
-  useOutsideClick(props.onClose);
+
+  function handleOutsideClickClose(evt) {
+    if (evt.target === evt.currentTarget && props.isOpen) {
+      props.onClose();
+    }
+  }
 
   return (
     <div
-      className={`popup popup_${props.name} ${props.isOpen && "popup_opened"}`}
+      className={`popup popup_${props.name} ${props.isOpen && "popup_opened"}`} onMouseDown={handleOutsideClickClose}
     >
       <div className="popup__container">
         <button
