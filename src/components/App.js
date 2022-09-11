@@ -140,9 +140,9 @@ function App() {
       .finally(() => setIsShowDeletingText("Да"));
   }
 
-  function onRegister(password, email) {
+  function onRegister(email, password) {
     auth
-      .register(password, email)
+      .register(email, password)
       .then((res) => {
         if (res) {
           history.push("/signin");
@@ -155,9 +155,9 @@ function App() {
       });
   }
 
-  function onLogin(password, email) {
+  function onLogin(email, password) {
     auth
-      .login(password, email)
+      .login(email, password)
       .then((res) => {
         if (res.token) {
           setEmail(email);

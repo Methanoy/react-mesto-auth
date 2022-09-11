@@ -9,7 +9,7 @@ const Login = ({ onLogin }) => {
     if (!email || !password) {
       return;
     }
-    onLogin(password, email);
+    onLogin(email, password);
   };
 
   const handleEmailChange = (evt) => {

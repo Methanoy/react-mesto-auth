@@ -89,9 +89,9 @@ class Api {
 }
 
 const api = new Api({
-  cardsUrl: "https://mesto.nomoreparties.co/v1/cohort-42/cards",
-  userUrl: "https://nomoreparties.co/v1/cohort-42/users/me",
-  avatarUrl: "https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar",
+  cardsUrl: "http://localhost:3000/cards",
+  userUrl: "http://localhost:3000/users/me",
+  avatarUrl: "http://localhost:3000/users/me/avatar",
   headers: {
     authorization: "a1aad93d-4f3c-4558-841a-f9fb04c02ec2",
     "Content-Type": "application/json",
