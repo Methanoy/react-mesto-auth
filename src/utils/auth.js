@@ -1,6 +1,7 @@
 import { handleResponse } from "./api";
 
 export const BASE_URL = "http://localhost:3000";
+//вынести базовый путь в константы utils
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {

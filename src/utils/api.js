@@ -100,6 +100,7 @@ const api = new Api({
   cardsUrl: "http://localhost:3000/cards",
   userUrl: "http://localhost:3000/users/me",
   avatarUrl: "http://localhost:3000/users/me/avatar",
+  //вынести базовый путь в константы utils
   headers: {
     "Content-Type": "application/json",
   },
