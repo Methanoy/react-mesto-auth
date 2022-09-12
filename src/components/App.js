@@ -158,13 +158,10 @@ function App() {
   function onLogin(email, password) {
     auth
       .login(email, password)
-      .then((res) => {
-        if (res.token) {
+      .then(() => {
           setEmail(email);
-          localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
           history.push("/");
-        }
       })
       .catch((err) => {
         console.log(`Ошибка при логине пользователя: ${err}`);

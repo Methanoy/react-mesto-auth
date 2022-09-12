@@ -16,12 +16,14 @@ class Api {
 
   getInitialCardsData() {
     return fetch(this.cardsUrl, {
+      credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
 
   getInitialUserData() {
     return fetch(this.userUrl, {
+      credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
@@ -29,6 +31,7 @@ class Api {
   editUserInfo(data) {
     return fetch(this.userUrl, {
       method: "PATCH",
+      credentials: "include",
       headers: this.headers,
       body: JSON.stringify({
         name: data.name,
@@ -40,6 +43,7 @@ class Api {
   editUserAvatar(data) {
     return fetch(this.avatarUrl, {
       method: "PATCH",
+      credentials: "include",
       headers: this.headers,
       body: JSON.stringify({
         avatar: data.avatar,
@@ -50,6 +54,7 @@ class Api {
   addNewCard(data) {
     return fetch(this.cardsUrl, {
       method: "POST",
+      credentials: "include",
       headers: this.headers,
       body: JSON.stringify({
         name: data.name,
@@ -61,6 +66,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this.cardsUrl}/${id}`, {
       method: "DELETE",
+      credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
@@ -76,6 +82,7 @@ class Api {
   _likeCard(id) {
     return fetch(`${this.cardsUrl}/${id}/likes`, {
       method: "PUT",
+      credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
@@ -83,6 +90,7 @@ class Api {
   _unLikeCard(id) {
     return fetch(`${this.cardsUrl}/${id}/likes`, {
       method: "DELETE",
+      credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
@@ -93,7 +101,6 @@ const api = new Api({
   userUrl: "http://localhost:3000/users/me",
   avatarUrl: "http://localhost:3000/users/me/avatar",
   headers: {
-    authorization: "a1aad93d-4f3c-4558-841a-f9fb04c02ec2",
     "Content-Type": "application/json",
   },
 });
