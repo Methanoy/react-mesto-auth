@@ -1,35 +1,26 @@
-export const handleResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(
-    `Okay, Houston, we've had a problem here: ${res.status}`
-  );
-};
+import BASE_URL from "./utils.js";
 class Api {
   constructor(options) {
-    this.cardsUrl = options.cardsUrl;
-    this.userUrl = options.userUrl;
-    this.avatarUrl = options.avatarUrl;
+    this.baseUrl = options.baseUrl;
     this.headers = options.headers;
   }
 
   getInitialCardsData() {
-    return fetch(this.cardsUrl, {
+    return fetch(`${this.baseUrl}/cards`, {
       credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
 
   getInitialUserData() {
-    return fetch(this.userUrl, {
+    return fetch(`${this.baseUrl}/users/me`, {
       credentials: "include",
       headers: this.headers,
     }).then(handleResponse);
   }
 
   editUserInfo(data) {
-    return fetch(this.userUrl, {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       credentials: "include",
       headers: this.headers,
@@ -41,7 +32,7 @@ class Api {
   }
 
   editUserAvatar(data) {
-    return fetch(this.avatarUrl, {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       credentials: "include",
       headers: this.headers,
@@ -52,7 +43,7 @@ class Api {
   }
 
   addNewCard(data) {
-    return fetch(this.cardsUrl, {
+    return fetch(`${this.baseUrl}/cards`, {
       method: "POST",
       credentials: "include",
       headers: this.headers,
@@ -64,7 +55,7 @@ class Api {
   }
 
   deleteCard(id) {
-    return fetch(`${this.cardsUrl}/${id}`, {
+    return fetch(`${this.baseUrl}/cards/${id}`, {
       method: "DELETE",
       credentials: "include",
       headers: this.headers,
@@ -80,7 +71,7 @@ class Api {
   }
 
   _likeCard(id) {
-    return fetch(`${this.cardsUrl}/${id}/likes`, {
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       credentials: "include",
       headers: this.headers,
@@ -88,7 +79,7 @@ class Api {
   }
 
   _unLikeCard(id) {
-    return fetch(`${this.cardsUrl}/${id}/likes`, {
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       credentials: "include",
       headers: this.headers,
@@ -97,13 +88,19 @@ class Api {
 }
 
 const api = new Api({
-  cardsUrl: "http://localhost:3000/cards",
-  userUrl: "http://localhost:3000/users/me",
-  avatarUrl: "http://localhost:3000/users/me/avatar",
-  //вынести базовый путь в константы utils
+  baseUrl: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
 export default api;
+
+export const handleResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(
+    `Okay, Houston, we've had a problem here: ${res.status}`
+  );
+};
