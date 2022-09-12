@@ -31,14 +31,13 @@ export const login = (email, password) => {
   }).then(handleResponse);
 };
 
-export const checkToken = (token) => {
+export const checkToken = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
   }).then(handleResponse);
 };

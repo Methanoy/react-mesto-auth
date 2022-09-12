@@ -158,10 +158,12 @@ function App() {
   function onLogin(email, password) {
     auth
       .login(email, password)
-      .then(() => {
+      .then((res) => {
+        if (res) {
           setEmail(email);
           setIsLoggedIn(true);
           history.push("/");
+        }
       })
       .catch((err) => {
         console.log(`Ошибка при логине пользователя: ${err}`);
@@ -170,21 +172,18 @@ function App() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
       auth
-        .checkToken(token)
+        .checkToken()
         .then((res) => {
           if (res) {
             setIsLoggedIn(true);
-            setEmail(res.data.email);
+            setEmail(res.email);
             history.push("/");
           }
         })
         .catch((err) =>
           console.log(`Ошибка при авторизации пользователя: ${err}`)
         );
-    }
   }, [history]);
 
   useEffect(() => {
