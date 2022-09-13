@@ -1,4 +1,4 @@
-import BASE_URL from "./utils.js";
+import { BASE_URL, handleResponse } from "./utils.js";
 class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
@@ -95,12 +95,3 @@ const api = new Api({
 });
 
 export default api;
-
-export const handleResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(
-    `Okay, Houston, we've had a problem here: ${res.status}`
-  );
-};

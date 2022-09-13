@@ -1,5 +1,4 @@
-import { handleResponse } from "./api";
-import BASE_URL from "./utils";
+import { BASE_URL, handleResponse } from "./utils.js";
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -27,6 +26,17 @@ export const login = (email, password) => {
       email,
       password,
     }),
+  }).then(handleResponse);
+};
+
+export const logout = () => {
+  return fetch(`${BASE_URL}/signout`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   }).then(handleResponse);
 };
 
