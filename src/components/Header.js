@@ -1,18 +1,16 @@
 import {
-  Route, Link, useHistory, Switch,
+  Route, Link, Switch,
 } from 'react-router-dom';
 import { useState } from 'react';
 import headerLogo from '../images/header_logo.svg';
 import SmallMenu from './SmallMenu';
 
 function Header({ email, setLogOut }) {
-  const history = useHistory();
   const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
 
   function onSignout() {
-    localStorage.removeItem('jwt');
+    setIsSmallMenuOpen(false);
     setLogOut();
-    history.push('/signin');
   }
 
   function toggleSmallMenu() {

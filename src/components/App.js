@@ -52,7 +52,7 @@ function App() {
     setIsSelectedCard(card);
     setIsImagePopupOpen(true);
   };
-  const handleSetIsLogOut = () => setIsLoggedIn(false);
+  // const handleSetIsLogOut = () => setIsLoggedIn(false);
   const handleChangeInfoTooltipStatus = (state) => setIsInfoTooltip(
     { isOpen: true, status: state },
   );
@@ -160,13 +160,28 @@ function App() {
       });
   }
 
+  function onLogout() {
+    auth
+      .logout()
+      .then(() => {
+        setIsLoggedIn(false);
+        setEmail(null);
+        history.push('/signin');
+      })
+      .catch((err) => {
+        console.log(`Ошибка при прекращении пользователем сеанса: ${err}`);
+        handleChangeInfoTooltipStatus(false);
+      });
+  }
+
   useEffect(() => {
     auth
       .checkToken()
       .then((res) => {
+        console.log(res);
         if (res) {
           setIsLoggedIn(true);
-          setEmail(res.email);
+          setEmail(res.user.email);
           history.push('/');
         }
       })
@@ -202,7 +217,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header email={email} setLogOut={handleSetIsLogOut} />
+        <Header email={email} setLogOut={onLogout} />
 
         <Switch>
           <ProtectedRoute
