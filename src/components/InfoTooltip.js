@@ -1,7 +1,7 @@
-import { React } from "react";
-import { useEscKeydown } from "../utils/hooks";
-import allowed from "../images/auth__allowed.svg";
-import denied from "../images/auth__denied.svg";
+import { React } from 'react';
+import useEscKeydown from '../utils/hooks';
+import allowed from '../images/auth__allowed.svg';
+import denied from '../images/auth__denied.svg';
 
 function InfoTooltip({ onClose, infoTooltip }) {
   useEscKeydown(onClose);
@@ -13,7 +13,7 @@ function InfoTooltip({ onClose, infoTooltip }) {
   }
 
   return (
-    <section className={`popup ${infoTooltip.isOpen && "popup_opened"}`} onMouseDown={handleOutsideClickClose}>
+    <section className={`popup ${infoTooltip.isOpen && 'popup_opened'}`} onMouseDown={handleOutsideClickClose}>
       <div className="popup__container">
         <button
           className="popup__close-button"
@@ -29,8 +29,8 @@ function InfoTooltip({ onClose, infoTooltip }) {
           ></img>
           <h3 className="popup__title popup__title_auth">
             {infoTooltip.status
-              ? "Вы успешно зарегистрировались!"
-              : "Что-то пошло не так! Попробуйте еще раз."}
+              ? 'Вы успешно зарегистрировались!'
+              : 'Что-то пошло не так! Попробуйте еще раз.'}
           </h3>
         </div>
       </div>

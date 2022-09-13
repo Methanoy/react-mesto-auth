@@ -1,19 +1,19 @@
-import { React, useState } from "react";
+import { React, useState } from 'react';
 
 const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!email || !password) {
+    if (!userEmail || !password) {
       return;
     }
-    onLogin(email, password);
+    onLogin(userEmail, password);
   };
 
   const handleEmailChange = (evt) => {
-    setEmail(evt.target.value);
+    setUserEmail(evt.target.value);
   };
 
   const handlePasswordChange = (evt) => {
@@ -30,7 +30,7 @@ const Login = ({ onLogin }) => {
             className="authorization__input"
             type="email"
             name="login"
-            value={email}
+            value={userEmail}
             onChange={handleEmailChange}
             placeholder="Email"
             minLength="2"

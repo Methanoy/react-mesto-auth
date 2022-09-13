@@ -1,17 +1,17 @@
-import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = ({ onRegister }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onRegister(email, password);
+    onRegister(userEmail, password);
   };
 
   const handleEmailChange = (evt) => {
-    setEmail(evt.target.value);
+    setUserEmail(evt.target.value);
   };
 
   const handlePasswordChange = (evt) => {
@@ -28,7 +28,7 @@ const Register = ({ onRegister }) => {
             className="authorization__input"
             type="email"
             name="login"
-            value={email}
+            value={userEmail}
             onChange={handleEmailChange}
             placeholder="Email"
             minLength="2"

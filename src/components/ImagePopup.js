@@ -1,5 +1,4 @@
 function ImagePopup(props) {
-
   function handleOutsideClickClose(evt) {
     if (evt.target === evt.currentTarget && props.isOpen) {
       props.onClose();
@@ -7,7 +6,7 @@ function ImagePopup(props) {
   }
 
   return (
-    <div className={`popup popup_zoom ${props.isOpen && "popup_opened"}`} onMouseDown={handleOutsideClickClose}>
+    <div className={`popup popup_zoom ${props.isOpen && 'popup_opened'}`} onMouseDown={handleOutsideClickClose}>
       <div className="popup__container popup__container_zoom">
         <img
           className="popup__zoom-image"

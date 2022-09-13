@@ -1,4 +1,4 @@
-import { useEscKeydown } from "../utils/hooks";
+import useEscKeydown from '../utils/hooks';
 
 const PopupWithForm = (props) => {
   useEscKeydown(props.onClose);
@@ -11,7 +11,7 @@ const PopupWithForm = (props) => {
 
   return (
     <div
-      className={`popup popup_${props.name} ${props.isOpen && "popup_opened"}`} onMouseDown={handleOutsideClickClose}
+      className={`popup popup_${props.name} ${props.isOpen && 'popup_opened'}`} onMouseDown={handleOutsideClickClose}
     >
       <div className="popup__container">
         <button

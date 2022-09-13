@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-export function useEscKeydown(handleClosePopup) {
+function useEscKeydown(handleClosePopup) {
   useEffect(() => {
     function handleEscClose(evt) {
-      if (evt.key === "Escape") {
+      if (evt.key === 'Escape') {
         handleClosePopup();
       }
     }
-    document.addEventListener("keydown", handleEscClose);
-    return () => document.removeEventListener("keydown", handleEscClose);
+    document.addEventListener('keydown', handleEscClose);
+    return () => document.removeEventListener('keydown', handleEscClose);
   });
 }
+
+export default useEscKeydown;

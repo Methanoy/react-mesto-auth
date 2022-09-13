@@ -1,21 +1,23 @@
-import "../index.css";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import ConfirmationPopup from "./ConfirmationPopup";
-import EditProfilePopup from "./EditProfilePopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ImagePopup from "./ImagePopup";
-import Login from "./Login";
-import Register from "./Register";
-import InfoTooltip from "./InfoTooltip";
-import React, { useState, useEffect } from "react";
-import api from "../utils/api.js";
-import * as auth from "../utils/auth";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import EditAvatarPopup from "./EditAvatarPopup";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
+import '../index.css';
+import React, { useState, useEffect } from 'react';
+import {
+  Redirect, Route, Switch, useHistory,
+} from 'react-router-dom';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import ConfirmationPopup from './ConfirmationPopup';
+import EditProfilePopup from './EditProfilePopup';
+import AddPlacePopup from './AddPlacePopup';
+import ImagePopup from './ImagePopup';
+import Login from './Login';
+import Register from './Register';
+import InfoTooltip from './InfoTooltip';
+import api from '../utils/api';
+import * as auth from '../utils/auth';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import EditAvatarPopup from './EditAvatarPopup';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   const history = useHistory();
@@ -24,7 +26,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const [deleteCardWithConfirm, setDeleteCardWithConfirm] = useState({
     isOpen: false,
@@ -39,9 +41,9 @@ function App() {
   const [currentUser, setIsCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  const [showSavingText, setIsShowSavingText] = useState("Сохранить");
-  const [showCreatingText, setIsShowCreatingText] = useState("Создать");
-  const [showDeletingText, setIsShowDeletingText] = useState("Да");
+  const [showSavingText, setIsShowSavingText] = useState('Сохранить');
+  const [showCreatingText, setIsShowCreatingText] = useState('Создать');
+  const [showDeletingText, setIsShowDeletingText] = useState('Да');
 
   const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
   const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
@@ -51,14 +53,14 @@ function App() {
     setIsImagePopupOpen(true);
   };
   const handleSetIsLogOut = () => setIsLoggedIn(false);
-  const handleChangeInfoTooltipStatus = (state) =>
-    setIsInfoTooltip({ isOpen: true, status: state });
-  const handleDeleteCardClick = (card) =>
-    setDeleteCardWithConfirm({
-      ...deleteCardWithConfirm,
-      isOpen: true,
-      card: card,
-    });
+  const handleChangeInfoTooltipStatus = (state) => setIsInfoTooltip(
+    { isOpen: true, status: state },
+  );
+  const handleDeleteCardClick = (card) => setDeleteCardWithConfirm({
+    ...deleteCardWithConfirm,
+    isOpen: true,
+    card,
+  });
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -70,45 +72,39 @@ function App() {
   };
 
   function handleUpdateUser(data) {
-    setIsShowSavingText("Сохранение...");
+    setIsShowSavingText('Сохранение...');
     api
       .editUserInfo(data)
       .then((userData) => {
         setIsCurrentUser(userData);
         closeAllPopups();
       })
-      .catch((err) =>
-        console.log(`Ошибка при редактировании данных пользователя: ${err}`)
-      )
-      .finally(() => setIsShowSavingText("Сохранить"));
+      .catch((err) => console.log(`Ошибка при редактировании данных пользователя: ${err}`))
+      .finally(() => setIsShowSavingText('Сохранить'));
   }
 
   function handleAddPlaceSubmit(data) {
-    setIsShowCreatingText("Создаём...");
+    setIsShowCreatingText('Создаём...');
     api
       .addNewCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) =>
-        console.log(`Ошибка при добавлении новой карточки: ${err}`)
-      )
-      .finally(() => setIsShowCreatingText("Создать"));
+      .catch((err) => console.log(`Ошибка при добавлении новой карточки: ${err}`))
+      .finally(() => setIsShowCreatingText('Создать'));
   }
 
   function handleUpdateAvatar(data) {
-    setIsShowSavingText("Сохранение...");
+    setIsShowSavingText('Сохранение...');
     api
       .editUserAvatar(data)
       .then((userData) => {
         setIsCurrentUser(userData);
         closeAllPopups();
       })
-      .catch((err) =>
-        console.log(`Ошибка при редактировании данных аватара: ${err}`)
-      )
-      .finally(() => setIsShowSavingText("Сохранить"));
+      .catch((err) => console.log(`Ошибка при редактировании данных аватара: ${err}`))
+      .finally(() => setIsShowSavingText('Сохранить'));
   }
 
   function handleCardLike(card) {
@@ -116,35 +112,29 @@ function App() {
     api
       .changeCardLikeStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       })
-      .catch((err) =>
-        console.log(`Ошибка при редактировании данных лайка: ${err}`)
-      );
+      .catch((err) => console.log(`Ошибка при редактировании данных лайка: ${err}`));
   }
 
   function handleCardDelete(card) {
-    setIsShowDeletingText("Удаляем...");
+    setIsShowDeletingText('Удаляем...');
     api
       .deleteCard(card._id)
       .then((delCard) => {
-        setCards((state) =>
-          state.filter((c) => (c._id === card._id ? !delCard : c))
-        );
+        setCards((state) => state.filter((c) => (c._id === card._id ? !delCard : c)));
         closeAllPopups();
       })
       .catch((err) => console.log(`Ошибка при удалении карточки: ${err}`))
-      .finally(() => setIsShowDeletingText("Да"));
+      .finally(() => setIsShowDeletingText('Да'));
   }
 
-  function onRegister(email, password) {
+  function onRegister(userEmail, password) {
     auth
-      .register(email, password)
+      .register(userEmail, password)
       .then((res) => {
         if (res) {
-          history.push("/signin");
+          history.push('/signin');
           handleChangeInfoTooltipStatus(true);
         }
       })
@@ -154,14 +144,14 @@ function App() {
       });
   }
 
-  function onLogin(email, password) {
+  function onLogin(userEmail, password) {
     auth
-      .login(email, password)
+      .login(userEmail, password)
       .then((res) => {
         if (res) {
-          setEmail(email);
+          setEmail(userEmail);
           setIsLoggedIn(true);
-          history.push("/");
+          history.push('/');
         }
       })
       .catch((err) => {
@@ -171,18 +161,16 @@ function App() {
   }
 
   useEffect(() => {
-      auth
-        .checkToken()
-        .then((res) => {
-          if (res) {
-            setIsLoggedIn(true);
-            setEmail(res.email);
-            history.push("/");
-          }
-        })
-        .catch((err) =>
-          console.log(`Ошибка при авторизации пользователя: ${err}`)
-        );
+    auth
+      .checkToken()
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          setEmail(res.email);
+          history.push('/');
+        }
+      })
+      .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
   }, [history]);
 
   useEffect(() => {
@@ -192,11 +180,9 @@ function App() {
         .then((cardsArr) => {
           setCards(cardsArr.reverse());
         })
-        .catch((err) =>
-          console.log(
-            `Ошибка при получении первоначальных данных карточек с сервера: ${err}`
-          )
-        );
+        .catch((err) => console.log(
+          `Ошибка при получении первоначальных данных карточек с сервера: ${err}`,
+        ));
     }
   }, [isLoggedIn]);
 
@@ -207,11 +193,9 @@ function App() {
         .then((userData) => {
           setIsCurrentUser(userData);
         })
-        .catch((err) =>
-          console.log(
-            `Ошибка при получении первоначальных данных пользователя с сервера: ${err}`
-          )
-        );
+        .catch((err) => console.log(
+          `Ошибка при получении первоначальных данных пользователя с сервера: ${err}`,
+        ));
     }
   }, [isLoggedIn]);
 

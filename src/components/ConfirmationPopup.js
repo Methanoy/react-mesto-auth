@@ -1,5 +1,5 @@
-import { React } from "react";
-import PopupWithForm from "./PopupWithForm";
+import { React } from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function ConfirmationPopup({
   deleteCardInfo: { isOpen, card },

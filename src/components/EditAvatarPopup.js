@@ -1,5 +1,5 @@
-import { React, useEffect, useRef } from "react";
-import PopupWithForm from "./PopupWithForm";
+import { React, useEffect, useRef } from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
   const avatarRef = useRef(null);
@@ -13,7 +13,7 @@ function EditAvatarPopup(props) {
   }
 
   useEffect(() => {
-    avatarRef.current.value = "";
+    avatarRef.current.value = '';
   }, [props.isOpen]);
 
   return (
@@ -32,7 +32,7 @@ function EditAvatarPopup(props) {
         name="avatar"
         placeholder="Ссылка на аватар"
         autoComplete="off"
-        ref={avatarRef || ""}
+        ref={avatarRef || ''}
         required
       />
       <span className="avatar-input-error popup__input-error"></span>

@@ -1,4 +1,4 @@
-function SmallMenu({ email, onSignout}) {
+function SmallMenu({ email, onSignout }) {
   return (
     <nav className="header__menu_small">
       <ul

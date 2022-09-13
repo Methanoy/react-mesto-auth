@@ -1,4 +1,5 @@
-import { BASE_URL, handleResponse } from "./utils.js";
+import { BASE_URL, handleResponse } from './utils';
+
 class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
@@ -7,22 +8,22 @@ class Api {
 
   getInitialCardsData() {
     return fetch(`${this.baseUrl}/cards`, {
-      credentials: "include",
+      credentials: 'include',
       headers: this.headers,
     }).then(handleResponse);
   }
 
   getInitialUserData() {
     return fetch(`${this.baseUrl}/users/me`, {
-      credentials: "include",
+      credentials: 'include',
       headers: this.headers,
     }).then(handleResponse);
   }
 
   editUserInfo(data) {
     return fetch(`${this.baseUrl}/users/me`, {
-      method: "PATCH",
-      credentials: "include",
+      method: 'PATCH',
+      credentials: 'include',
       headers: this.headers,
       body: JSON.stringify({
         name: data.name,
@@ -33,8 +34,8 @@ class Api {
 
   editUserAvatar(data) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
-      method: "PATCH",
-      credentials: "include",
+      method: 'PATCH',
+      credentials: 'include',
       headers: this.headers,
       body: JSON.stringify({
         avatar: data.avatar,
@@ -44,8 +45,8 @@ class Api {
 
   addNewCard(data) {
     return fetch(`${this.baseUrl}/cards`, {
-      method: "POST",
-      credentials: "include",
+      method: 'POST',
+      credentials: 'include',
       headers: this.headers,
       body: JSON.stringify({
         name: data.name,
@@ -56,32 +57,31 @@ class Api {
 
   deleteCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}`, {
-      method: "DELETE",
-      credentials: "include",
+      method: 'DELETE',
+      credentials: 'include',
       headers: this.headers,
     }).then(handleResponse);
   }
 
   changeCardLikeStatus(id, flag) {
     if (flag) {
-      return this._likeCard(id);
-    } else {
-      return this._unLikeCard(id);
+      return this.likeCard(id);
     }
+    return this.unLikeCard(id);
   }
 
-  _likeCard(id) {
+  likeCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: "PUT",
-      credentials: "include",
+      method: 'PUT',
+      credentials: 'include',
       headers: this.headers,
     }).then(handleResponse);
   }
 
-  _unLikeCard(id) {
+  unLikeCard(id) {
     return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
-      credentials: "include",
+      method: 'DELETE',
+      credentials: 'include',
       headers: this.headers,
     }).then(handleResponse);
   }
@@ -90,7 +90,7 @@ class Api {
 const api = new Api({
   baseUrl: BASE_URL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 

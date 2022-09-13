@@ -1,13 +1,13 @@
-import { React, useEffect, useRef } from "react";
-import PopupWithForm from "./PopupWithForm";
+import { React, useEffect, useRef } from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
   const linkRef = useRef(null);
   const captionRef = useRef(null);
 
   useEffect(() => {
-    captionRef.current.value = "";
-    linkRef.current.value = "";
+    captionRef.current.value = '';
+    linkRef.current.value = '';
   }, [props.isOpen]);
 
   function handleSubmit(evt) {
@@ -37,7 +37,7 @@ function AddPlacePopup(props) {
         minLength="2"
         maxLength="30"
         autoComplete="off"
-        ref={captionRef || ""}
+        ref={captionRef || ''}
         required
       />
       <span className="cardname-input-error popup__input-error"></span>
@@ -48,7 +48,7 @@ function AddPlacePopup(props) {
         name="link"
         placeholder="Ссылка на картинку"
         autoComplete="off"
-        ref={linkRef || ""}
+        ref={linkRef || ''}
         required
       />
       <span className="link-input-error popup__input-error"></span>

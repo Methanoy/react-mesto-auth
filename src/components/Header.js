@@ -1,16 +1,18 @@
-import headerLogo from "../images/header_logo.svg";
-import { Route, Link, useHistory, Switch } from "react-router-dom";
-import SmallMenu from "./SmallMenu";
-import { useState } from "react";
+import {
+  Route, Link, useHistory, Switch,
+} from 'react-router-dom';
+import { useState } from 'react';
+import headerLogo from '../images/header_logo.svg';
+import SmallMenu from './SmallMenu';
 
 function Header({ email, setLogOut }) {
   const history = useHistory();
   const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
 
   function onSignout() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
     setLogOut();
-    history.push("/signin");
+    history.push('/signin');
   }
 
   function toggleSmallMenu() {
@@ -62,7 +64,7 @@ function Header({ email, setLogOut }) {
             </nav>
             <button
               onClick={toggleSmallMenu}
-              className={`header__small-menu-btn ${isSmallMenuOpen && "header__small-menu-btn_active"}`}
+              className={`header__small-menu-btn ${isSmallMenuOpen && 'header__small-menu-btn_active'}`}
               type="button"
             >
               <span/>
