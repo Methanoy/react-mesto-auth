@@ -164,9 +164,10 @@ function App() {
     auth
       .logout()
       .then(() => {
-        setIsLoggedIn(false);
-        setEmail(null);
         history.push('/signin');
+        setIsLoggedIn(false);
+        setEmail('');
+        setIsCurrentUser({});
       })
       .catch((err) => {
         console.log(`Ошибка при прекращении пользователем сеанса: ${err}`);
@@ -178,10 +179,9 @@ function App() {
     auth
       .checkToken()
       .then((res) => {
-        console.log(res);
         if (res) {
           setIsLoggedIn(true);
-          setEmail(res.user.email);
+          setEmail(res.email);
           history.push('/');
         }
       })
