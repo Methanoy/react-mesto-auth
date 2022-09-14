@@ -52,7 +52,7 @@ function App() {
     setIsSelectedCard(card);
     setIsImagePopupOpen(true);
   };
-  // const handleSetIsLogOut = () => setIsLoggedIn(false);
+
   const handleChangeInfoTooltipStatus = (state) => setIsInfoTooltip(
     { isOpen: true, status: state },
   );
@@ -148,9 +148,10 @@ function App() {
     auth
       .login(userEmail, password)
       .then((res) => {
-        if (res) {
+        if (res.token) {
           setEmail(userEmail);
           setIsLoggedIn(true);
+          localStorage.setItem('login-status', 'logged-in');
           history.push('/');
         }
       })
@@ -168,6 +169,7 @@ function App() {
         setIsLoggedIn(false);
         setEmail('');
         setIsCurrentUser({});
+        localStorage.removeItem('login-status');
       })
       .catch((err) => {
         console.log(`Ошибка при прекращении пользователем сеанса: ${err}`);
@@ -176,16 +178,19 @@ function App() {
   }
 
   useEffect(() => {
-    auth
-      .checkToken()
-      .then((res) => {
-        if (res) {
-          setIsLoggedIn(true);
-          setEmail(res.email);
-          history.push('/');
-        }
-      })
-      .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
+    const token = localStorage.getItem('login-status');
+    if (token) {
+      auth
+        .checkToken()
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            setEmail(res.email);
+            history.push('/');
+          }
+        })
+        .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
+    }
   }, [history]);
 
   useEffect(() => {
