@@ -4,10 +4,9 @@ const handleResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  // eslint-disable-next-line prefer-promise-reject-errors
-  return Promise.reject(
+  return Promise.reject(new Error(
     `Okay, Houston, we've had a problem here: ${res.status}`,
-  );
+  ));
 };
 
 export { BASE_URL, handleResponse };
